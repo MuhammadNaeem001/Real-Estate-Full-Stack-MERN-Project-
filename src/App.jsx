@@ -1,7 +1,30 @@
+import {BrowserRouter,Routes,Route} from "react-router-dom";
+import Signin from "./pages/Signin";
+import SignUp from "./pages/SignUp";
+import About from "./pages/About";
+import Profile from "./pages/Profile";
+import Home from "./pages/Home";
+
+
 export default function App() {
-  return (
-    <h1 className="text-pink-800 bg-red-500 w-fit px-3 py-4 rounded-full mx-auto mt-10 cursor-pointer hover:bg-black hover:text-white animate-bounce text-3xl ">
-      Hello world!
-    </h1>
+  return(
+
+    <BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Home/>}/>
+    <Route path="/sign-in" element={<Signin/>}/>
+    <Route path="/sign-up" element={<SignUp/>}/>
+    <Route path="/about" element={<About/>}/>
+    <Route path="/profile" element={<Profile/>}/>
+    
+    
+
+    
+
+
+  </Routes>
+  
+  
+  </BrowserRouter>
   )
 }
