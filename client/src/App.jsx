@@ -10,7 +10,7 @@ import PrivateRoute from "./components/privateRoutes.jsx";
 
 export default function App() {
   const apiKey= import.meta.env.VITE_FIREBASE_API_KEY
-  console.log({apiKey})
+ 
   return(
 
     <BrowserRouter>

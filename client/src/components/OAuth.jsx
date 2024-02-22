@@ -31,7 +31,7 @@ export default function OAuth() {
     } catch (error) {
       console.log('could not sign in with google', error);
     }
-  };s
+  };
   return (
     <button
       onClick={handleGoogleClick}
