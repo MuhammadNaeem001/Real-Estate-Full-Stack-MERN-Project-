@@ -6,21 +6,21 @@ import {  useSelector } from 'react-redux'
 export default function Header() {
     const {currentUser}= useSelector(state=>state.user)
   return (
-    <header className='bg-slate-200 shadow-md'>
-        <div className='flex justify-between item-center max-w-6xl mx-auto p-3 '>
+    <header className='bg-slate-200 shadow-xl items-center h-full py-2 '>
+        <div className='flex justify-between  item-center max-w-6xl mx-auto  '>
            <Link to='/'>
-        <h1 className='font-bold text-sm s:text-xl flex flec-wrap'>
+        <h1 className='font-bold text-sm sm:text-xl flex flex-wrap mt-2'>
             <spamn className="text-slate-500">Sahand</spamn>
             <span className='text-slate-700'>Estate</span>
         </h1>
         </Link> 
-<form className='bg-slate-100 p-3 rounded-lg flex item-center'>
-    <input type='text' placeholder='Search'className='bg-transparent focus:outline:none w24 sm:w-16'/>
-    <FaSearch className='text-slate-600'/>
+<form className='bg-slate-100 p-3 rounded-lg flex flex-row item-center'>
+    <input type='text' placeholder='Search'className=' bg-transparent focus:outline-none  '/>
+    <FaSearch className='text-slate-600 mt-1'/>
     
 </form>
 
-<ul className='flex gap-4'>
+<ul className='flex gap-4 mt-2'>
 <Link to='/'>
     <li className='hidden sm:inline text-slate-700 hover:underline'>Home</li>
     </Link> 

@@ -36,7 +36,7 @@ const {loading,error} = useSelector((state)=>(state.user))
         return
       }
       dispatch (signInSuccess(data))
-      navigate('/')
+      navigate('/create-listing')
       
     } catch (error) {
       console.log(error)
