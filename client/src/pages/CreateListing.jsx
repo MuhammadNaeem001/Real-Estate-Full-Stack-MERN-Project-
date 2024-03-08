@@ -50,6 +50,7 @@ export default function CreateListing() {
         .catch((err) => {
           setImageUploadError('Image upload failed (2 mb max per image)');
           setUploading(false);
+          console.log(err)
         });
     } else {
       setImageUploadError('You can only upload 6 images per listing');
@@ -58,30 +59,35 @@ export default function CreateListing() {
   };
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
-      const storage = getStorage(app);
-      const fileName = new Date().getTime() + file.name;
-      const storageRef = ref(storage, fileName);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
-        },
-        (error) => {
-          reject(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            resolve(downloadURL);
-          });
-        }
-      ).catch((error) => {
-        reject(error); 
-      });;
+        const storage = getStorage(app);
+        const fileName = new Date().getTime() + file.name;
+        const storageRef = ref(storage, fileName);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        uploadTask.on(
+            'state_changed',
+            (snapshot) => {
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log(`Upload is ${progress}% done`);
+            },
+            (error) => {
+                reject(error); // Reject on error during upload
+            },
+            () => {
+                // Upload completed successfully
+                getDownloadURL(uploadTask.snapshot.ref)
+                    .then((downloadURL) => {
+                        resolve(downloadURL); // Resolve with download URL
+                    })
+                    .catch((error) => {
+                        reject(error); // Reject if error occurred during URL retrieval
+                    });
+            }
+        );
     });
-  };
+};
+
 
   const handleRemoveImage = (index)=>{
     setFormData({
