@@ -16,7 +16,6 @@ import {
 } from 'react-icons/fa';
 import Contact from '../components/Contact';
 
-
 // https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
 
 export default function Listing() {
@@ -59,19 +58,16 @@ export default function Listing() {
       )}
       {listing && !loading && !error && (
         <div>
-          <Swiper navigation>
-            {listing.imageUrls.map((url) => (
-              <SwiperSlide key={url}>
-                <div
-                  className='h-[550px]'
-                  style={{
-                    background: `url(${url}) center no-repeat`,
-                    backgroundSize: 'cover',
-                  }}
-                ></div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+         <Swiper navigation>
+  {listing.imageUrls.map((url, index) => (
+    <SwiperSlide key={index}>
+      <img src={url}
+      className='h-[550px] w-full object-cover'
+      alt="" />
+    </SwiperSlide>
+  ))}
+</Swiper>
+
           <div className='fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer'>
             <FaShare
               className='text-slate-500'
@@ -137,13 +133,15 @@ export default function Listing() {
                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
               </li>
             </ul>
-            {currentUser && listing.userRef !==currentUser._id && !contact(
-                <button onClick={()=> setContact(true)}className='bg bg-slate-700 text-white rounded-lg
-          uppercase hover:opacity-95 p-3'>Contact Landlord</button>
+            {currentUser && listing.userRef !== currentUser._id && !contact && (
+              <button
+                onClick={() => setContact(true)}
+                className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
+              >
+                Contact landlord
+              </button>
             )}
-
-            {contact && <Contact listing={listing}/>}
-          
+            {contact && <Contact listing={listing} />}
           </div>
         </div>
       )}
